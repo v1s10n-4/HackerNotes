@@ -1,0 +1,36 @@
+{
+  "repository": "@station/v1s10n_4-test",
+  "personalAccessToken": "76c90dadd98ec1946c26a23acfbeb8e364ab3a811a58e7697e4aded33164c9c0",
+  "rules": [
+    {
+      "path": "src/design-system/defaultTheme.ts",
+      "parsers": [
+        {
+          "name": "to-jss",
+          "options": {
+            "formatName": "camelCase",
+            "formatTokens":{
+              "colorFormat": "hex8",
+              "borderFormat": "object",
+              "durationFormat": "number",
+              "opacityFormat": "number",
+              "depthFormat": "number",
+              "measurementFormat": "number",
+              "shadowFormat": "string",
+              "gradientFormat": "array",
+              "textStyleFormat": "classObject"
+            },
+            "formatConfig": {
+              "jssObjectName": "defaultTheme",
+              "singleQuote": true,
+              "printWidth": 120,
+              "isVectorFileType": false,
+              "isBitmapFileType": false,
+              "isBitmapScale": false
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
