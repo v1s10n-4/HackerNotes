@@ -1,0 +1,9 @@
+@font-face {
+	font-family: '3270-Regular';
+	src: url('./fonts/3270Narrow.ttf') format('truetype');
+	font-weight: normal;
+}
+
+body > #root > div {
+	height: 100vh;
+}
