@@ -1,6 +1,6 @@
 @font-face {
-	font-family: '3270-Regular';
-	src: url('./fonts/3270Narrow.ttf') format('truetype');
+	font-family: '3270Narrow';
+	src: url('./design-system/fonts/3270Narrow.ttf') format('truetype');
 	font-weight: normal;
 }
 
