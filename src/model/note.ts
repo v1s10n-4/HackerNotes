@@ -1,5 +1,5 @@
 export interface Note {
-	id: number;
+	id: string;
 	text: string;
 }
 
@@ -17,4 +17,4 @@ interface NoteActionType<T, P> {
 export type NoteAction =
 	| NoteActionType<typeof NoteActions.ADD_NOTE, Note>
 	| NoteActionType<typeof NoteActions.EDIT_NOTE, Note>
-	| NoteActionType<typeof NoteActions.DELETE_NOTE, number>;
+	| NoteActionType<typeof NoteActions.DELETE_NOTE, string>;

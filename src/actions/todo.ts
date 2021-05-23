@@ -9,7 +9,7 @@ export function addTodo(todo: Todo): TodoAction {
 }
 
 // Async Function expample with redux-thunk
-export function completeTodo(todoId: number) {
+export function completeTodo(todoId: string) {
 	// here you could do API eg
 
 	return (dispatch: Function, getState: () => RootState) => {
@@ -17,14 +17,14 @@ export function completeTodo(todoId: number) {
 	};
 }
 
-export function uncompleteTodo(todoId: number): TodoAction {
+export function uncompleteTodo(todoId: string): TodoAction {
 	return {
 		type: TodoActions.UNCOMPLETE_TODO,
 		payload: todoId,
 	};
 }
 
-export function deleteTodo(todoId: number): TodoAction {
+export function deleteTodo(todoId: string): TodoAction {
 	return {
 		type: TodoActions.DELETE_TODO,
 		payload: todoId,

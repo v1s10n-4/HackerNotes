@@ -55,11 +55,9 @@ export interface EditorProps {
 
 const useStyles = makeStyles((theme) => ({
 	root: {
-		'& div[role="textbox"]': {
-			caretColor: theme.palette.text.primary,
-			caretShape: 'block',
-			paddingLeft: '1.5rem',
-		},
+		caretColor: theme.palette.text.primary,
+		caretShape: 'block',
+		paddingLeft: '3.5rem',
 		'& [data-slate-node="element"]:before': {
 			content: "'>'",
 			position: 'absolute',
@@ -113,6 +111,7 @@ export const createElement = (
 
 const Editor: FC<EditorProps> = ({ initialValue, onChange }) => {
 	const classes = useStyles();
+	const editableProps = { autoFocus: true, className: classes.root };
 
 	const pluginsMemo = useMemo(() => {
 		const plugins = [
@@ -160,17 +159,15 @@ const Editor: FC<EditorProps> = ({ initialValue, onChange }) => {
 	}, []);
 
 	return (
-		<Box className={classes.root}>
-			<SlatePlugins
-				id={'main'}
-				components={components}
-				initialValue={initialValue}
-				editableProps={{ autoFocus: true }}
-				onChange={onChange}
-				plugins={pluginsMemo}
-				options={options}
-			/>
-		</Box>
+		<SlatePlugins
+			id={'main'}
+			components={components}
+			initialValue={initialValue}
+			editableProps={editableProps}
+			onChange={onChange}
+			plugins={pluginsMemo}
+			options={options}
+		/>
 	);
 };
 
