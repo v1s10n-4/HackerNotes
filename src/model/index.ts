@@ -1,10 +1,11 @@
-
-    import { TodoAction } from './todo';
-    import { ConfigAction } from './config';
+import { TodoAction } from './todo';
+import { ConfigAction } from './config';
+import { NoteAction } from './note';
 
 export * from './config';
 export * from './todo';
+export * from './note';
 
 
 export type Action =
-    | ConfigAction | TodoAction;
+    | ConfigAction | TodoAction | NoteAction;

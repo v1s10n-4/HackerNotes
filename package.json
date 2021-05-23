@@ -4,7 +4,9 @@
   "dependencies": {
     "@material-ui/core": "4.11.1",
     "@material-ui/icons": "4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.58",
     "@material-ui/styles": "4.11.1",
+    "@udecode/slate-plugins": "^1.0.0-alpha.25",
     "localforage": "1.7.3",
     "react": "17.0.1",
     "react-dom": "17.0.1",
@@ -16,6 +18,10 @@
     "redux-logger": "3.0.6",
     "redux-persist": "6.0.0",
     "redux-thunk": "2.3.0",
+    "slate": "^0.63.0",
+    "slate-history": "^0.62.0",
+    "slate-hyperscript": "^0.62.0",
+    "slate-react": "^0.63.0",
     "typescript": "4.1.2"
   },
   "scripts": {
@@ -36,11 +42,11 @@
   "devDependencies": {
     "@specifyapp/cli": "^0.0.54",
     "@storybook/addon-actions": "^6.2.9",
+    "@storybook/addon-controls": "^6.2.9",
+    "@storybook/addon-docs": "^6.2.9",
     "@storybook/addon-essentials": "^6.2.9",
     "@storybook/addon-links": "^6.2.9",
     "@storybook/addons": "^6.2.9",
-    "@storybook/addon-docs": "^6.2.9",
-    "@storybook/addon-controls": "^6.2.9",
     "@storybook/node-logger": "^6.2.9",
     "@storybook/preset-create-react-app": "^3.1.7",
     "@storybook/react": "^6.2.9",

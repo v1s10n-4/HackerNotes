@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/styles";
 import * as React from "react";
 import { useSelector } from "react-redux";
 import { HomeBox } from "../components";
-import { RootState } from "../reducers/index";
+import { RootState } from '../reducers';
 
 export function HomePage() {
 	const classes = useStyles();
