@@ -14,7 +14,7 @@ export function editNote(note: Note): NoteAction {
 	};
 }
 
-export function deleteNote(noteId: number): NoteAction {
+export function deleteNote(noteId: string): NoteAction {
 	return {
 		type: NoteActions.DELETE_NOTE,
 		payload: noteId,

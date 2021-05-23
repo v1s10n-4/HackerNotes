@@ -2,9 +2,9 @@ import { ConfigActions } from '../model';
 import { Note, NoteAction, NoteActions } from '../model';
 import createReducer from './createReducer';
 
-const initialState = [
+const initialState: Note[] = [
 	{
-		id: Math.random(),
+		id: btoa(String(Math.random())),
 		text: JSON.stringify([{ children: [{ text: 'fesse!' }] }]),
 	},
 ];
