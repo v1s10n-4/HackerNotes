@@ -2,6 +2,7 @@ import defaultTheme from './defaultTheme';
 import { Palette } from '@material-ui/core/styles/createPalette';
 import { Typography } from '@material-ui/core/styles/createTypography';
 import { ThemeOptions } from '@material-ui/core';
+import { HNMuiThemeOverrides } from './muiThemeOverrides';
 
 export type HNTheme = typeof defaultTheme;
 export type HNThemeTextStyles = typeof defaultTheme.textStyle;
@@ -62,16 +63,17 @@ export const formatPalette: FormatPalette = colors => {
 
 	};
 	return palette;
-}
+};
 
 export const formatTypography: FormatTypography = textStyles => ({
 	fontFamily: `'${textStyles.fontFamily.font.family}'`,
 	fontSize: textStyles.fontFamily.font.size,
-})
+});
 
 export const formatTheme: FormatTheme = theme => ({
+	...HNMuiThemeOverrides,
 	palette: formatPalette(theme.color),
 	typography: formatTypography(theme.textStyle),
-})
+});
 
 export default formatTheme;
