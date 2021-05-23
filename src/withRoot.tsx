@@ -1,4 +1,4 @@
-import { CssBaseline, ThemeOptions } from '@material-ui/core';
+import { CssBaseline } from '@material-ui/core';
 import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
 import * as React from "react";
