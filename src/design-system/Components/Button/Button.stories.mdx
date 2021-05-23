@@ -3,7 +3,7 @@ import { Button } from './Button';
 
 export const Template = ({ ...args }) => <Button {...args} >{args.children}</Button>;
 
-<Meta title={'Components'} component={Button} args={{
+<Meta title={'Components/Button'} component={Button} args={{
 	variant: {
 		name: 'Variant',
 		description: 'fesse',
@@ -11,17 +11,6 @@ export const Template = ({ ...args }) => <Button {...args} >{args.children}</But
 			type: 'radio',
 			options: ['contained', 'outlined', 'text']
 		}
-	}
-}} parameters={{
-	backgrounds: {
-		default: 'dark',
-		values: [
-			{ name: 'white', value: '#ffffff' },
-			{ name: 'light', value: '#eeeeee' },
-			{ name: 'gray', value: '#cccccc' },
-			{ name: 'dark', value: '#222222' },
-			{ name: 'black', value: '#000000' },
-		]
 	}
 }} />
 
