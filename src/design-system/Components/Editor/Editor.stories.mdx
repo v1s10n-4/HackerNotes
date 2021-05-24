@@ -1,5 +1,5 @@
 import { Meta, Story, Canvas, SourceState, ArgsTable } from '@storybook/addon-docs/blocks';
-import Editor, { createElement } from './Editor'; import {
+import Editor  from './Editor'; import {
 	ELEMENT_BLOCKQUOTE,
 	ELEMENT_CODE_BLOCK,
 	ELEMENT_CODE_LINE,
@@ -12,6 +12,24 @@ import Editor, { createElement } from './Editor'; import {
 } from '@udecode/slate-plugins';
 
 <Meta title={'Components/Editor'} component={Editor} />
+
+export const createElement = (
+	text = '',
+	{
+		type = ELEMENT_PARAGRAPH,
+		mark,
+	} = {}
+) => {
+	const leaf = { text };
+	if (mark) {
+		leaf[mark] = true;
+	}
+	return {
+		type,
+		children: [leaf],
+	};
+};
+
 
 export const initialValue = [
 	createElement('🧱 Elements', { type: ELEMENT_H1 }),
@@ -74,7 +92,7 @@ export const initialValue = [
 ];
 
 # Editor
-
+'
 <Canvas>
 	<Story name="Editor">
 		<div style={{width: '100vw'}}>

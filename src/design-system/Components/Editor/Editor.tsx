@@ -36,11 +36,10 @@ import {
 	ELEMENT_IMAGE,
 	ELEMENT_PARAGRAPH,
 	SlatePlugins,
-	TNode,
 	withPlaceholders,
 } from '@udecode/slate-plugins';
-import React, { FC, useMemo, useState } from 'react';
-import { Box, makeStyles } from '@material-ui/core';
+import React, { FC, useMemo } from 'react';
+import { makeStyles } from '@material-ui/core';
 import { optionsAutoformat } from './config/autoFormat';
 import { optionsResetBlockTypePlugin } from './config/resetBlockType';
 import { optionsSoftBreakPlugin } from './config/softBreak';
@@ -55,14 +54,24 @@ export interface EditorProps {
 
 const useStyles = makeStyles((theme) => ({
 	root: {
+		height: '100%',
+		backgroundColor: theme.palette.background.default,
+		overflow: 'auto',
 		caretColor: theme.palette.text.primary,
 		caretShape: 'block',
 		paddingLeft: '3.5rem',
+		'& [data-slate-node="element"]': {
+			position: 'relative',
+		},
 		'& [data-slate-node="element"]:before': {
 			content: "'>'",
+			fontSize: '1.5rem',
 			position: 'absolute',
-			bottom: '0%',
-			left: '-2.5rem',
+			bottom: '15%',
+			left: -25,
+		},
+		'& .slate-ul:before': {
+			content: "''",
 		},
 		'& *': {
 			fontFamily: theme.typography.fontFamily,
@@ -86,32 +95,9 @@ const useStyles = makeStyles((theme) => ({
 let components = withPlaceholders(createSlatePluginsComponents(), []);
 
 const options = createSlatePluginsOptions();
-
-export const createElement = (
-	text = '',
-	{
-		type = ELEMENT_PARAGRAPH,
-		mark,
-	}: {
-		type?: string;
-		mark?: string;
-	} = {}
-) => {
-	const leaf = { text };
-	if (mark) {
-		// @ts-ignore
-		leaf[mark] = true;
-	}
-
-	return {
-		type,
-		children: [leaf],
-	};
-};
-
 const Editor: FC<EditorProps> = ({ initialValue, onChange }) => {
 	const classes = useStyles();
-	const editableProps = { autoFocus: true, className: classes.root };
+	const editableProps = { autoFocus: true, className: `mousetrap ${classes.root}` };
 
 	const pluginsMemo = useMemo(() => {
 		const plugins = [

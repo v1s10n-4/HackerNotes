@@ -9,9 +9,8 @@ export type CreateTransition = (
 export const createTransition: CreateTransition = (_, options) => {
 	if (options?.duration && typeof options.duration === 'number')
 		return `${options.duration} steps(${Math.floor((options.duration / 1000) * 16)}, end) ${options.delay}`;
-	else
-		return 'none';
-}
+	else return 'none';
+};
 
 export const HNMuiThemeOverrides: ThemeOptions = {
 	overrides: {
@@ -23,12 +22,11 @@ export const HNMuiThemeOverrides: ThemeOptions = {
 				backgroundColor: defaultTheme.color.primaryMain,
 				'&:focus, &:hover': {
 					color: defaultTheme.color.primaryMain,
-					backgroundColor: [defaultTheme.color.backgroundDefault, '!important']
+					backgroundColor: [defaultTheme.color.backgroundDefault, '!important'],
 				},
 				'&:active': {
 					animation: 'boxShadow 1.6s infinite, textShadow 1.6s infinite',
 				},
-
 			},
 			outlined: {
 				backgroundColor: defaultTheme.color.backgroundDefault,
@@ -36,10 +34,22 @@ export const HNMuiThemeOverrides: ThemeOptions = {
 				'&:focus, &:hover': {
 					color: defaultTheme.color.backgroundDefault,
 					backgroundColor: [defaultTheme.color.primaryMain, '!important'],
-					boxShadow: `inset 0 0 0 5px ${defaultTheme.color.backgroundDefault}`
+					boxShadow: `inset 0 0 0 5px ${defaultTheme.color.backgroundDefault}`,
 				},
 				'&:active': {
 					animation: 'textShadow 1.6s infinite',
+				},
+			},
+			text: {
+				padding: 0,
+				fontSize: '1em',
+				textTransform: 'unset',
+				'&:active': {
+					color: defaultTheme.color.backgroundDefault,
+				},
+				'&:focus, &:hover': {
+					animation: 'textShadow 1.6s infinite',
+					backgroundColor: [defaultTheme.color.backgroundDefault, '!important'],
 				},
 			},
 			label: {
@@ -79,7 +89,7 @@ export const HNMuiThemeOverrides: ThemeOptions = {
 							left: 0,
 							right: 0,
 						},
-					}
+					},
 				},
 				'$outlined &': {
 					'&::before': {
@@ -111,10 +121,16 @@ export const HNMuiThemeOverrides: ThemeOptions = {
 							left: 5,
 							right: 5,
 						},
-					}
-				}
-			}
-		}
+					},
+				},
+			},
+		},
+		MuiDialog: {
+			paper: {
+				padding: 20,
+				border: `7px double ${defaultTheme.color.primaryMain}`,
+			},
+		},
 	},
 	props: {
 		MuiButtonBase: {
@@ -122,8 +138,8 @@ export const HNMuiThemeOverrides: ThemeOptions = {
 		},
 		MuiButton: {
 			variant: 'outlined',
-			color: 'primary'
-		}
+			color: 'primary',
+		},
 	},
 	shape: {
 		borderRadius: 0,
