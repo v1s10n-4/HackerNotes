@@ -15,7 +15,6 @@ export const noteList = createReducer<Note[]>(initialState, {
 		return [...state, action.payload];
 	},
 	[NoteActions.EDIT_NOTE](state: Note[], action: NoteAction) {
-		console.log(action);
 		// @ts-ignore
 		return state.map((note) => (action.payload?.id === note.id ? action.payload : note));
 	},

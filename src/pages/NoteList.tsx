@@ -28,7 +28,6 @@ const renderInput = (params: AutocompleteRenderInputParams) => <TextField {...pa
 export const NoteList = () => {
 	useStyles();
 	const noteList = useSelector((state: RootState) => state.noteList);
-	console.log(noteList);
 	const noteActions = useActions(NoteActions);
 	const history = useHistory();
 
@@ -58,7 +57,6 @@ export const NoteList = () => {
 			e.preventDefault();
 			createNote();
 		}
-		console.log(lastValue, e);
 	};
 
 	const checkShortcut: KeyboardEventHandler = (e) => {
