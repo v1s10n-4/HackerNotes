@@ -62,7 +62,7 @@ export const Terminal = () => {
 			<Editor initialValue={currentNoteValue} onChange={onChange} />
 			<AppBar variant={'outlined'} position={'relative'} component={'footer'}>
 				{shortcuts.map((shortcut) => (
-					<Typography color={'textPrimary'} variant={'caption'} key={shortcut.key}>
+					<Typography color={'textPrimary'} variant={'caption'} key={shortcut.keys}>
 						{shortcut.description}
 						<Button variant={'text'} onClick={shortcut.callback}>
 							{shortcut.name}
