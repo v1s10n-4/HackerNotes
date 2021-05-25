@@ -1,5 +1,6 @@
 import { ThemeOptions } from '@material-ui/core';
-import defaultTheme from './defaultTheme';
+import type {} from '@material-ui/lab/themeAugmentation';
+import { HNTheme } from './FormatTheme';
 
 export type CreateTransition = (
 	props: string | string[],
@@ -12,29 +13,31 @@ export const createTransition: CreateTransition = (_, options) => {
 	else return 'none';
 };
 
-export const HNMuiThemeOverrides: ThemeOptions = {
+export type HNMuiThemeOverrides = (theme: HNTheme) => ThemeOptions;
+
+export const HNMuiThemeOverrides: HNMuiThemeOverrides = (theme) => ({
 	overrides: {
 		MuiButton: {
 			root: {
 				transition: 'none',
 			},
 			contained: {
-				backgroundColor: defaultTheme.color.primaryMain,
+				backgroundColor: theme.color.primaryMain,
 				'&:focus, &:hover': {
-					color: defaultTheme.color.primaryMain,
-					backgroundColor: [defaultTheme.color.backgroundDefault, '!important'],
+					color: theme.color.primaryMain,
+					backgroundColor: [theme.color.backgroundDefault, '!important'],
 				},
 				'&:active': {
 					animation: 'boxShadow 1.6s infinite, textShadow 1.6s infinite',
 				},
 			},
 			outlined: {
-				backgroundColor: defaultTheme.color.backgroundDefault,
+				backgroundColor: theme.color.backgroundDefault,
 				border: 'none !important',
 				'&:focus, &:hover': {
-					color: defaultTheme.color.backgroundDefault,
-					backgroundColor: [defaultTheme.color.primaryMain, '!important'],
-					boxShadow: `inset 0 0 0 5px ${defaultTheme.color.backgroundDefault}`,
+					color: theme.color.backgroundDefault,
+					backgroundColor: [theme.color.primaryMain, '!important'],
+					boxShadow: `inset 0 0 0 5px ${theme.color.backgroundDefault}`,
 				},
 				'&:active': {
 					animation: 'textShadow 1.6s infinite',
@@ -45,11 +48,11 @@ export const HNMuiThemeOverrides: ThemeOptions = {
 				fontSize: '1em',
 				textTransform: 'unset',
 				'&:active': {
-					color: defaultTheme.color.backgroundDefault,
+					color: theme.color.backgroundDefault,
 				},
 				'&:focus, &:hover': {
 					animation: 'textShadow 1.6s infinite',
-					backgroundColor: [defaultTheme.color.backgroundDefault, '!important'],
+					backgroundColor: [theme.color.backgroundDefault, '!important'],
 				},
 			},
 			label: {
@@ -65,16 +68,16 @@ export const HNMuiThemeOverrides: ThemeOptions = {
 						bottom: 3,
 						left: -3,
 						right: -3,
-						borderLeft: `5px solid ${defaultTheme.color.primaryMain}`,
-						borderRight: `5px solid ${defaultTheme.color.primaryMain}`,
+						borderLeft: `5px solid ${theme.color.primaryMain}`,
+						borderRight: `5px solid ${theme.color.primaryMain}`,
 					},
 					'&::after': {
 						top: -3,
 						bottom: -3,
 						left: 3,
 						right: 3,
-						borderBottom: `5px solid ${defaultTheme.color.primaryMain}`,
-						borderTop: `5px solid ${defaultTheme.color.primaryMain}`,
+						borderBottom: `5px solid ${theme.color.primaryMain}`,
+						borderTop: `5px solid ${theme.color.primaryMain}`,
 					},
 					'&:focus, &:hover': {
 						'&::before': {
@@ -97,16 +100,16 @@ export const HNMuiThemeOverrides: ThemeOptions = {
 						bottom: 0,
 						left: -5,
 						right: -5,
-						borderLeft: `5px solid ${defaultTheme.color.primaryMain}`,
-						borderRight: `5px solid ${defaultTheme.color.primaryMain}`,
+						borderLeft: `5px solid ${theme.color.primaryMain}`,
+						borderRight: `5px solid ${theme.color.primaryMain}`,
 					},
 					'&::after': {
 						top: -5,
 						bottom: -5,
 						left: 0,
 						right: 0,
-						borderBottom: `5px solid ${defaultTheme.color.primaryMain}`,
-						borderTop: `5px solid ${defaultTheme.color.primaryMain}`,
+						borderBottom: `5px solid ${theme.color.primaryMain}`,
+						borderTop: `5px solid ${theme.color.primaryMain}`,
 					},
 					'&:focus, &:hover': {
 						'&::before': {
@@ -128,7 +131,53 @@ export const HNMuiThemeOverrides: ThemeOptions = {
 		MuiDialog: {
 			paper: {
 				padding: 20,
-				border: `7px double ${defaultTheme.color.primaryMain}`,
+				border: `7px double ${theme.color.primaryMain}`,
+			},
+		},
+		MuiAutocomplete: {
+			root: {
+				height: '100%',
+			},
+			paper: {
+				margin: 0,
+				backgroundColor: 'transparent',
+			},
+			listbox: { padding: 0 },
+			inputRoot: {
+				position: 'relative',
+				paddingLeft: '40px !important',
+				'&:before': {
+					content: "'>'",
+					fontSize: '1.5rem',
+					position: 'absolute',
+					bottom: '25%',
+					left: 25,
+				},
+			},
+			popper: {
+				transform: 'translate3d(0, 70px, 0px) !important',
+				zIndex: 0,
+			},
+			noOptions: {
+				display: 'none',
+			},
+			option: {
+				'&[data-focus="true"]': {
+					color: theme.color.backgroundDefault,
+					backgroundColor: theme.color.primaryMain,
+				},
+			},
+		},
+		MuiAppBar: {
+			root: {
+				border: 'none',
+				backgroundColor: 'transparent !important',
+				borderTop: `3px solid ${theme.color.primaryMain}`,
+				zIndex: 0,
+				padding: '5px 15px',
+				display: 'flex',
+				flexDirection: 'row',
+				justifyContent: 'space-between',
 			},
 		},
 	},
@@ -156,4 +205,4 @@ export const HNMuiThemeOverrides: ThemeOptions = {
 		},
 		create: createTransition,
 	},
-};
+});
