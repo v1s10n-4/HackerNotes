@@ -9,7 +9,7 @@ export type CreateTransition = (
 
 export const createTransition: CreateTransition = (_, options) => {
 	if (options?.duration && typeof options.duration === 'number')
-		return `${options.duration} steps(${Math.floor((options.duration / 1000) * 16)}, end) ${options.delay}`;
+		return `${options.duration} steps(${Math.floor((options.duration / 1000) * 16)}, end) ${options.delay || ''}`;
 	else return 'none';
 };
 
@@ -162,9 +162,13 @@ export const HNMuiThemeOverrides: HNMuiThemeOverrides = (theme) => ({
 				display: 'none',
 			},
 			option: {
+				justifyContent: 'space-between',
 				'&[data-focus="true"]': {
 					color: theme.color.backgroundDefault,
 					backgroundColor: theme.color.primaryMain,
+					'& button': {
+						visibility: 'visible',
+					},
 				},
 			},
 		},
@@ -178,6 +182,11 @@ export const HNMuiThemeOverrides: HNMuiThemeOverrides = (theme) => ({
 				display: 'flex',
 				flexDirection: 'row',
 				justifyContent: 'space-between',
+			},
+		},
+		MuiOutlinedInput: {
+			notchedOutline: {
+				border: 'none',
 			},
 		},
 	},
