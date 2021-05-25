@@ -27,7 +27,7 @@ export const Terminal = () => {
 	const noteActions = useActions(NoteActions);
 
 	const { id } = useRouteParams(router.note);
-	const lastNote = useSelector((state: RootState) => state.noteList.find((x) => x.id == id));
+	const lastNote = useSelector((state: RootState) => state.noteList.find((x) => x.id === id));
 	const currentNoteValue = lastNote && JSON.parse(lastNote.text);
 
 	const [helpDialogOpen, setHelpDialogOpen] = useState(false);
