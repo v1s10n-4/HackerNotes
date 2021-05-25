@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/styles';
 import * as React from 'react';
 import { useActions } from '../actions';
 import * as TodoActions from '../actions/todo';
+import shortid from 'shortid';
 
 interface Props {
 	open: boolean;
@@ -18,7 +19,7 @@ export function TodoDialog(props: Props) {
 
 	const handleClose = () => {
 		todoActions.addTodo({
-			id: btoa(String(Math.random())),
+			id: shortid.generate(),
 			completed: false,
 			text: newTodoText,
 		});

@@ -55,7 +55,6 @@ export interface EditorProps {
 const useStyles = makeStyles((theme) => ({
 	root: {
 		height: '100%',
-		backgroundColor: theme.palette.background.default,
 		overflow: 'auto',
 		caretColor: theme.palette.text.primary,
 		caretShape: 'block',
@@ -70,13 +69,24 @@ const useStyles = makeStyles((theme) => ({
 			bottom: '15%',
 			left: -25,
 		},
-		'& .slate-ul:before': {
+		'& .slate-ul:before, & .slate-ol:before, & .slate-li:before': {
 			content: "''",
 		},
-		'& *': {
+		'& [class^="slate-"]': {
 			fontFamily: theme.typography.fontFamily,
 			color: 'transparent',
 			textShadow: `0 0 0 ${theme.palette.text.primary}`,
+		},
+		'& li div:not([class^="slate-"])': {
+			'&:before': {
+				bottom: 0,
+				left: -50,
+			},
+		},
+		'& div:not([class^="slate-"])': {
+			'&:before': {
+				bottom: 0,
+			},
 		},
 		'& blockquote': {
 			borderLeft: `2px solid ${theme.palette.primary.main}`,
@@ -88,6 +98,9 @@ const useStyles = makeStyles((theme) => ({
 		},
 		'& .slate-li': {
 			color: `${theme.palette.text.primary} !important`,
+		},
+		'& input': {
+			filter: 'hue-rotate(100deg) invert(1)',
 		},
 	},
 }));

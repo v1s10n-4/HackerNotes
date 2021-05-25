@@ -1,13 +1,11 @@
 import { CssBaseline } from '@material-ui/core';
-import { createMuiTheme } from "@material-ui/core/styles";
-import { ThemeProvider } from "@material-ui/styles";
-import * as React from "react";
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
+import * as React from 'react';
 import formatTheme from './design-system/FormatTheme';
 import defaultTheme from './design-system/defaultTheme';
 
 const theme = createMuiTheme(formatTheme(defaultTheme));
-
-console.log(theme);
 
 export function withRoot(Component: any) {
 	function WithRoot(props: object) {
