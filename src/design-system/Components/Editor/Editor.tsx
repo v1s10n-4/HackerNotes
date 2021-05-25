@@ -64,9 +64,9 @@ const useStyles = makeStyles((theme) => ({
 		},
 		'& [data-slate-node="element"]:before': {
 			content: "'>'",
-			fontSize: '1.5rem',
+			fontSize: '1em',
 			position: 'absolute',
-			bottom: '15%',
+			bottom: '0em',
 			left: -25,
 		},
 		'& .slate-ul:before, & .slate-ol:before, & .slate-li:before': {
