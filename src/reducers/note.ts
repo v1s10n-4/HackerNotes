@@ -1,11 +1,12 @@
 import { ConfigActions } from '../model';
 import { Note, NoteAction, NoteActions } from '../model';
 import createReducer from './createReducer';
+import shortid from 'shortid';
 
 const initialState: Note[] = [
 	{
-		id: btoa(String(Math.random())),
-		text: JSON.stringify([{ children: [{ text: 'fesse!' }] }]),
+		id: shortid.generate(),
+		text: JSON.stringify([{ type: 'p', children: [{ text: '' }] }]),
 	},
 ];
 

@@ -10,7 +10,7 @@ export type FormatTheme = (theme: HNTheme) => ThemeOptions;
 export type FormatPalette = (colors: typeof defaultTheme.color) => Partial<Palette>;
 export type FormatTypography = (colors: typeof defaultTheme.textStyle) => Partial<Typography>;
 
-export const formatPalette: FormatPalette = colors => {
+export const formatPalette: FormatPalette = (colors) => {
 	const palette: Partial<Palette> = {
 		type: 'dark',
 		primary: {
@@ -60,18 +60,17 @@ export const formatPalette: FormatPalette = colors => {
 			contrastText: colors.successContrastText,
 		},
 		divider: colors.divider,
-
 	};
 	return palette;
 };
 
-export const formatTypography: FormatTypography = textStyles => ({
+export const formatTypography: FormatTypography = (textStyles) => ({
 	fontFamily: `'${textStyles.fontFamily.font.family}'`,
 	fontSize: textStyles.fontFamily.font.size,
 });
 
-export const formatTheme: FormatTheme = theme => ({
-	...HNMuiThemeOverrides,
+export const formatTheme: FormatTheme = (theme) => ({
+	...HNMuiThemeOverrides(theme),
 	palette: formatPalette(theme.color),
 	typography: formatTypography(theme.textStyle),
 });
