@@ -5,6 +5,9 @@ import { Terminal, NoteList } from './pages';
 // https://github.com/innFactory/react-typesafe-routes
 
 export const router = Router((route) => ({
+	default: route('/', {
+		component: NoteList,
+	}),
 	note: route('note/:id', {
 		component: Terminal,
 		params: {

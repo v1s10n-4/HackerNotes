@@ -1,6 +1,5 @@
 import {
 	Button,
-	Collapse,
 	Dialog,
 	DialogActions,
 	DialogContent,
@@ -12,9 +11,7 @@ import {
 	makeStyles,
 	Radio,
 	RadioGroup,
-	Slide,
 	Slider,
-	Typography,
 } from '@material-ui/core';
 import React, { FC, useCallback } from 'react';
 import { useSelector } from 'react-redux';
@@ -48,16 +45,22 @@ const SettingsDialog: FC<SettingsDialogProps> = ({ open, onClose }) => {
 	const classes = useStyles();
 	const config = useSelector((state: RootState) => state.config);
 	const configActions = useActions(ConfigActions);
-	const onUserThemeChamge = useCallback((_, theme) => {
-		document.body.className = 'off';
-		setTimeout(() => {
-			configActions.setTheme(theme);
-			document.body.className = 'on';
-		}, 1000);
-	}, []);
-	const onFontSizeChange = useCallback((_, fontSize) => {
-		configActions.setFontSize(fontSize);
-	}, []);
+	const onUserThemeChamge = useCallback(
+		(_, theme) => {
+			document.body.className = 'off';
+			setTimeout(() => {
+				configActions.setTheme(theme);
+				document.body.className = 'on';
+			}, 1000);
+		},
+		[configActions]
+	);
+	const onFontSizeChange = useCallback(
+		(_, fontSize) => {
+			configActions.setFontSize(fontSize);
+		},
+		[configActions]
+	);
 	const themeChoices = Object.keys(themes);
 	const marks = [
 		{
