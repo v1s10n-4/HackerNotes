@@ -1,11 +1,11 @@
 import { History } from 'history';
 import { combineReducers } from 'redux';
-import { Note } from '../model';
+import { Config, Note } from '../model';
 import * as configReducer from './config';
 import * as noteReducer from './note';
 
 export interface RootState {
-	drawerOpen: boolean;
+	config: Config;
 	noteList: Note[];
 }
 

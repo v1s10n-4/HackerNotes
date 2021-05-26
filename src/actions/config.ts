@@ -1,15 +1,15 @@
 import { ConfigAction, ConfigActions } from '../model';
 
-export function purgeState(): ConfigAction {
+export function setTheme(theme: string): ConfigAction {
 	return {
-		type: ConfigActions.PURGE_STATE,
-		payload: undefined,
+		type: ConfigActions.SET_THEME,
+		payload: theme,
 	};
 }
 
-export function setDrawerOpen(open: boolean): ConfigAction {
+export function setFontSize(fontSize: number): ConfigAction {
 	return {
-		type: ConfigActions.DRAWER_OPEN,
-		payload: open,
+		type: ConfigActions.SET_FONT_SIZE,
+		payload: fontSize,
 	};
 }

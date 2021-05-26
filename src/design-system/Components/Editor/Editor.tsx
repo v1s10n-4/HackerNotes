@@ -58,7 +58,8 @@ const useStyles = makeStyles((theme) => ({
 		overflow: 'auto',
 		caretColor: theme.palette.text.primary,
 		caretShape: 'block',
-		paddingLeft: '3.5rem',
+		paddingLeft: '3rem',
+		paddingTop: 10,
 		'& [data-slate-node="element"]': {
 			position: 'relative',
 		},

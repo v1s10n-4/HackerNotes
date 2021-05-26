@@ -4,11 +4,20 @@ import { ThemeProvider } from '@material-ui/styles';
 import * as React from 'react';
 import formatTheme from './design-system/FormatTheme';
 import defaultTheme from './design-system/defaultTheme';
+import AmberTheme from './design-system/AmberTheme';
+import { useSelector } from 'react-redux';
+import { RootState } from './reducers';
 
-const theme = createMuiTheme(formatTheme(defaultTheme));
+export const themes = {
+	'IBM 3270 (green)': defaultTheme,
+	'IBM 3290 (amber)': AmberTheme,
+};
 
 export function withRoot(Component: any) {
 	function WithRoot(props: object) {
+		const config = useSelector((state: RootState) => state.config);
+		// @ts-ignore
+		const theme = createMuiTheme(formatTheme(themes[config.theme], config.fontSize));
 		return (
 			<ThemeProvider theme={theme}>
 				<CssBaseline />
