@@ -9,7 +9,7 @@ export type CreateTransition = (
 
 export const createTransition: CreateTransition = (_, options) => {
 	if (options?.duration && typeof options.duration === 'number')
-		return `${options.duration} steps(${Math.floor((options.duration / 1000) * 16)}, end) ${options.delay || ''}`;
+		return `${options.duration}ms steps(${Math.floor((options.duration / 1000) * 16)}, end) ${options.delay || ''}`;
 	else return 'none';
 };
 
@@ -189,6 +189,38 @@ export const HNMuiThemeOverrides: HNMuiThemeOverrides = (theme) => ({
 				border: 'none',
 			},
 		},
+		MuiIconButton: {
+			root: {
+				'&:hover': {
+					backgroundColor: 'transparent !important',
+				},
+			},
+		},
+		MuiSlider: {
+			active: {
+				boxShadow: `0px 0px 0px 4px ${theme.color.primaryMain} !important`,
+			},
+			thumb: {
+				'&:hover, &:focus': {
+					boxShadow: `0px 0px 0px 3px ${theme.color.primaryMain}`,
+				},
+			},
+		},
+		MuiCollapse: {
+			wrapperInner: {
+				height: '100vh',
+				'&:first-child': {
+					opacity: 0,
+				},
+			},
+		},
+		MuiFormControlLabel: {
+			root: {
+				'&:hover, &:focus, &:focus-within': {
+					animation: 'textShadow 1.6s infinite',
+				},
+			},
+		},
 	},
 	props: {
 		MuiButtonBase: {
@@ -204,8 +236,8 @@ export const HNMuiThemeOverrides: HNMuiThemeOverrides = (theme) => ({
 	},
 	transitions: {
 		duration: {
-			shortest: 250,
-			shorter: 500,
+			shortest: 500,
+			shorter: 750,
 			short: 750,
 			standard: 1000,
 			complex: 1250,

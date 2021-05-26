@@ -1,5 +1,16 @@
 import * as React from 'react';
-import { AppBar, Button, IconButton, makeStyles, TextField, Typography } from '@material-ui/core';
+import {
+	AppBar,
+	Button,
+	Dialog,
+	DialogActions,
+	DialogContent,
+	DialogTitle,
+	IconButton,
+	makeStyles,
+	TextField,
+	Typography,
+} from '@material-ui/core';
 import { useSelector } from 'react-redux';
 import { RootState } from '../reducers';
 import { useActions } from '../actions';
@@ -12,6 +23,7 @@ import shortid from 'shortid';
 import { AutocompleteRenderInputParams } from '@material-ui/lab/Autocomplete/Autocomplete';
 import DeleteForeverSharpIcon from '@material-ui/icons/DeleteForeverSharp';
 import { FilterOptionsState } from '@material-ui/lab/useAutocomplete/useAutocomplete';
+import SettingsDialog from '../design-system/Components/SettingsDialog/SettingsDialog';
 
 const useStyles = makeStyles((theme) => ({
 	'@global': {
@@ -24,6 +36,11 @@ const useStyles = makeStyles((theme) => ({
 		visibility: 'hidden',
 		color: theme.palette.primary.contrastText,
 		fontSize: '1.5rem',
+	},
+	dialogContent: {
+		marginBottom: 20,
+		display: 'flex',
+		flexDirection: 'column',
 	},
 }));
 
@@ -41,6 +58,8 @@ export const NoteList = () => {
 	const noteList = useSelector((state: RootState) => state.noteList);
 	const noteActions = useActions(NoteActions);
 	const history = useHistory();
+	const [settingsDialogOpen, setSettingsDialogOpen] = useState(false);
+	const toggleSettingsDialogOpen = useCallback(() => setSettingsDialogOpen((prev) => !prev), []);
 
 	const createNote = useCallback(() => {
 		const newNote = {
@@ -72,14 +91,15 @@ export const NoteList = () => {
 		[history, createNote, deleteNote, isDeleting]
 	);
 
-	const toggleSettingsDialog = () => {};
-
 	const checkCommand: KeyboardEventHandler = (e) => {
 		const lastValue = (e.target as HTMLInputElement).value.trim();
 		const isNewNoteCommand = (lastValue === '/new' || lastValue === '/create') && e.key === 'Enter';
-		if (isNewNoteCommand || (e.metaKey && e.key === 'k')) {
+		const isSettingsCommand = lastValue === '/settings' && e.key === 'Enter';
+		if (isNewNoteCommand) {
 			e.preventDefault();
 			createNote();
+		} else if (isSettingsCommand) {
+			toggleSettingsDialogOpen();
 		}
 	};
 
@@ -87,7 +107,7 @@ export const NoteList = () => {
 		if (e.metaKey) {
 			e.preventDefault();
 			if (e.key === 'd') createNote();
-			if (e.key === '/') toggleSettingsDialog();
+			if (e.key === '/') toggleSettingsDialogOpen();
 		}
 	};
 
@@ -150,12 +170,13 @@ export const NoteList = () => {
 					</Button>
 				</Typography>
 				<Typography color={'textPrimary'} variant={'caption'}>
-					Press <b>&lt;cmd&gt;+&lt;/&gt;</b> to{' '}
-					<Button tabIndex={-1} variant={'text'}>
+					Type <b>/settings</b> or press <b>&lt;cmd&gt;+&lt;/&gt;</b> to{' '}
+					<Button tabIndex={-1} variant={'text'} onClick={toggleSettingsDialogOpen}>
 						open settings
 					</Button>
 				</Typography>
 			</AppBar>
+			<SettingsDialog open={settingsDialogOpen} onClose={toggleSettingsDialogOpen} />
 		</Fragment>
 	);
 };

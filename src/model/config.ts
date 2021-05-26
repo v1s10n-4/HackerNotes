@@ -1,6 +1,12 @@
 export enum ConfigActions {
 	PURGE_STATE = 'PURGE_STATE',
-	DRAWER_OPEN = 'DRAWER_OPEN',
+	SET_THEME = 'SET_THEME',
+	SET_FONT_SIZE = 'SET_FONT_SIZE',
+}
+
+export interface Config {
+	theme: string;
+	fontSize: number;
 }
 
 interface ConfigActionType<T, P> {
@@ -9,5 +15,5 @@ interface ConfigActionType<T, P> {
 }
 
 export type ConfigAction =
-	| ConfigActionType<typeof ConfigActions.PURGE_STATE, undefined>
-	| ConfigActionType<typeof ConfigActions.DRAWER_OPEN, boolean>;
+	| ConfigActionType<typeof ConfigActions.SET_THEME, string>
+	| ConfigActionType<typeof ConfigActions.SET_FONT_SIZE, number>;

@@ -6,9 +6,9 @@ import { HNMuiThemeOverrides } from './muiThemeOverrides';
 
 export type HNTheme = typeof defaultTheme;
 export type HNThemeTextStyles = typeof defaultTheme.textStyle;
-export type FormatTheme = (theme: HNTheme) => ThemeOptions;
+export type FormatTheme = (theme: HNTheme, fontSize: number) => ThemeOptions;
 export type FormatPalette = (colors: typeof defaultTheme.color) => Partial<Palette>;
-export type FormatTypography = (colors: typeof defaultTheme.textStyle) => Partial<Typography>;
+export type FormatTypography = (textStyles: typeof defaultTheme.textStyle, fontSize: number) => Partial<Typography>;
 
 export const formatPalette: FormatPalette = (colors) => {
 	const palette: Partial<Palette> = {
@@ -64,15 +64,15 @@ export const formatPalette: FormatPalette = (colors) => {
 	return palette;
 };
 
-export const formatTypography: FormatTypography = (textStyles) => ({
+export const formatTypography: FormatTypography = (textStyles, fontSize) => ({
 	fontFamily: `'${textStyles.fontFamily.font.family}'`,
-	fontSize: textStyles.fontFamily.font.size,
+	fontSize: fontSize || textStyles.fontFamily.font.size,
 });
 
-export const formatTheme: FormatTheme = (theme) => ({
+export const formatTheme: FormatTheme = (theme, fontSize) => ({
 	...HNMuiThemeOverrides(theme),
 	palette: formatPalette(theme.color),
-	typography: formatTypography(theme.textStyle),
+	typography: formatTypography(theme.textStyle, fontSize),
 });
 
 export default formatTheme;
