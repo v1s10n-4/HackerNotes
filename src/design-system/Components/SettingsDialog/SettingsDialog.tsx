@@ -101,6 +101,7 @@ const SettingsDialog: FC<SettingsDialogProps> = ({ open, onClose }) => {
 					<RadioGroup aria-label="theme" name="theme" value={config.theme} onChange={onUserThemeChamge}>
 						{themeChoices.map((themeChoice) => (
 							<FormControlLabel
+								key={themeChoice}
 								value={themeChoice}
 								control={
 									<Radio

@@ -11,6 +11,7 @@ import { useRouteParams } from 'react-typesafe-routes';
 import { router } from '../Router';
 import { useHistory } from 'react-router-dom';
 import EditorHelpDialog from '../design-system/Components/EditorHelpDialog/EditorHelpDialog';
+import { Note } from '../model';
 
 const useStyles = makeStyles((theme) => ({
 	'@global': {
@@ -35,7 +36,14 @@ export const Terminal = () => {
 
 	const onChange = useCallback(
 		(note) => {
-			if (id) noteActions.editNote({ id: id, text: JSON.stringify(note) });
+			if (id) {
+				const updatedNote: Note = {
+					id: id,
+					text: JSON.stringify(note),
+					updated_at: Date.now()
+				}
+				noteActions.editNote(updatedNote);
+			}
 		},
 		[noteActions, id]
 	);

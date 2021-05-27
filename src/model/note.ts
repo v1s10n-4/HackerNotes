@@ -1,6 +1,7 @@
 export interface Note {
 	id: string;
 	text: string;
+	updated_at: number;
 }
 
 export enum NoteActions {

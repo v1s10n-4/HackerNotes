@@ -13,6 +13,8 @@ import { AutocompleteRenderInputParams } from '@material-ui/lab/Autocomplete/Aut
 import DeleteForeverSharpIcon from '@material-ui/icons/DeleteForeverSharp';
 import { FilterOptionsState } from '@material-ui/lab/useAutocomplete/useAutocomplete';
 import SettingsDialog from '../design-system/Components/SettingsDialog/SettingsDialog';
+import TimeAgo from 'timeago-react';
+import { Note } from '../model';
 
 const useStyles = makeStyles((theme) => ({
 	'@global': {
@@ -33,9 +35,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-type AutocompleteNote = { id?: string; text: string };
-
-const getOptionLabel = (n: AutocompleteNote) =>
+const getOptionLabel = (n: Note) =>
 	'* ' + (n.text === 'new note' ? n.text : JSON.parse(n.text).shift().children[0].text || 'Untitled');
 
 const renderInput = (params: AutocompleteRenderInputParams) => <TextField {...params} autoFocus variant={'outlined'} />;
@@ -68,7 +68,6 @@ export const NoteList = () => {
 
 	const goToNote = useCallback(
 		(e, note) => {
-			console.log(note, e);
 			if (note) {
 				if (!note.id) createNote();
 				else if (note && isDeleting) {
@@ -102,30 +101,33 @@ export const NoteList = () => {
 
 	const onInputChange = useCallback((_, v) => setValue(v), []);
 
-	const filterOption = useCallback((options: AutocompleteNote[], state: FilterOptionsState<AutocompleteNote>) => {
+	const filterOption = useCallback((options: Note[], state: FilterOptionsState<Note>) => {
 		const inputValue = state.inputValue;
-		return options.filter((note: AutocompleteNote) => {
+		return options.filter((note: Note) => {
 			const input = inputValue.replace(/(\/delete |\/remove |\/rm )/, '');
 			const s = state.getOptionLabel(note).substr(2);
 			return s.includes(input);
-		});
+		}).sort((a, b) => b.updated_at - a.updated_at);
 	}, []);
 
-	const renderLabel = (options: AutocompleteNote) => {
+	const renderLabel = (options: Note) => {
 		return (
 			<Fragment>
 				<Typography>{getOptionLabel(options)}</Typography>
 				{options.text !== 'new note' && (
-					<IconButton
-						className={classes.delete}
-						size={'small'}
-						onClick={(e) => {
-							e.stopPropagation();
-							deleteNote(options.id);
-						}}
-					>
-						<DeleteForeverSharpIcon />
-					</IconButton>
+						<Typography>
+							<TimeAgo datetime={options.updated_at} />
+							<IconButton
+								className={classes.delete}
+								size={'small'}
+								onClick={(e) => {
+									e.stopPropagation();
+									deleteNote(options.id);
+								}}
+							>
+								<DeleteForeverSharpIcon />
+							</IconButton>
+						</Typography>
 				)}
 			</Fragment>
 		);
@@ -138,7 +140,7 @@ export const NoteList = () => {
 			<Autocomplete
 				open
 				inputValue={value}
-				options={[...noteList, { text: 'new note' }]}
+				options={[...noteList, { text: 'new note', id: '', updated_at: 0 }]}
 				getOptionLabel={getOptionLabel}
 				renderInput={renderInput}
 				onChange={goToNote}
