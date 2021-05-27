@@ -44,7 +44,6 @@ import { optionsAutoformat } from './config/autoFormat';
 import { optionsResetBlockTypePlugin } from './config/resetBlockType';
 import { optionsSoftBreakPlugin } from './config/softBreak';
 import { optionsExitBreakPlugin } from './config/exitBreak';
-import defaultTheme from '../../defaultTheme';
 import { TDescendant } from '@udecode/slate-plugins-core/dist/types/TDescendant';
 
 export interface EditorProps {
@@ -93,9 +92,9 @@ const useStyles = makeStyles((theme) => ({
 			borderLeft: `2px solid ${theme.palette.primary.main}`,
 		},
 		'& .slate-code, & .slate-code_block': {
-			border: `1px solid ${defaultTheme.color.primaryMain}`,
+			border: `1px solid ${theme.palette.primary.main}`,
 			borderRadius: 0,
-			backgroundColor: defaultTheme.color.backgroundDefault,
+			backgroundColor: theme.palette.background.default,
 		},
 		'& .slate-li': {
 			color: `${theme.palette.text.primary} !important`,

@@ -7,6 +7,7 @@ const initialState: Note[] = [
 	{
 		id: shortid.generate(),
 		text: JSON.stringify([{ type: 'p', children: [{ text: '' }] }]),
+		updated_at: Date.now(),
 	},
 ];
 
